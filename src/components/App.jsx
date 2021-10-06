@@ -8,12 +8,26 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      video: exampleVideoData[0]
+      video: exampleVideoData[0],
+      videos: exampleVideoData
     };
   }
 
-  selectClickedVideo (video) {
-    this.setState({video});
+  componentDidMount() {
+    this.getYoutubeVideos('cat');
+  }
+
+  selectClickedVideo(video) {
+    this.setState({ video });
+  }
+
+  getYoutubeVideos(query) {
+    this.props.searchYouTube(query, (videos) => {
+      this.setState({
+        videos: videos,
+        video: videos[0]
+      });
+    });
   }
 
   render() {
@@ -23,7 +37,7 @@ class App extends React.Component {
         <nav className="navbar" >
           <div className="col-md-6 offset-md-3">
             <div id="searchBar"><h5><em>TELL ME WAT-CHU WAAANT!</em></h5></div>
-            <Search />
+            <Search activeSearch={this.getYoutubeVideos.bind(this)} />
           </div>
         </nav>
         <div className="row">
@@ -32,8 +46,8 @@ class App extends React.Component {
             <VideoPlayer video={this.state.video} />
           </div>
           <div className="col-md-5">
-            <div id="videoList" className="video-list"><h5><em>Find things here!</em></h5></div>
-            <VideoList videos={exampleVideoData} handleClick={this.selectClickedVideo.bind(this)}/>
+            <div id="videoList"><h5><em>Find things here!</em></h5></div>
+            <VideoList videos={this.state.videos} handleClick={this.selectClickedVideo.bind(this)} />
           </div>
         </div>
       </div >

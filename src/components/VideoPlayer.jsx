@@ -1,17 +1,10 @@
 var VideoPlayer = (props) => {
   console.log(props);
 
-  let mediaObject, title, description;
+  let mediaObject = 'https://www.youtube.com/embed/' + props.video.id.videoId;
+  let title = props.video.snippet.title;
+  let description = props.video.snippet.description;
 
-  if (props.video === undefined) {
-    mediaObject = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
-    title = 'You\'ve been Rick Rolled! Congratulations!';
-    description = 'MEAT!';
-  } else {
-    mediaObject = "https://www.youtube.com/embed/" + props.video.id.videoId;
-    title = props.video.snippet.title;
-    description = props.video.snippet.description;
-  }
   return (
     <div className="video-player">
       <div className="embed-responsive embed-responsive-16by9">

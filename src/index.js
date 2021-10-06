@@ -3,9 +3,10 @@ import App from './components/App.js';
 import Search from './components/Search.js';
 import VideoPlayer from './components/VideoPlayer.js';
 import VideoList from './components/VideoList.js';
+import searchYouTube from './lib/searchYouTube.js';
 
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App searchYouTube={searchYouTube}/>, document.getElementById('app'));
 
 
